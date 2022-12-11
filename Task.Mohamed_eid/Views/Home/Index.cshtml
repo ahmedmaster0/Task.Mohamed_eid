@@ -1,0 +1,132 @@
+﻿@model IEnumerable<PersonDataModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<style>
+    .table > thead {
+        background: #5A8DEE !important;
+        color: white;
+    }
+
+    .table > tbody {
+        text-align: center;
+    }
+
+    .styleImageProfile {
+        width: 50px;
+        height: 45px;
+        border-radius: 50%;
+    }
+</style>
+
+<div class="col-md-12" style="height:20px;">
+</div>
+
+<div class="text-center">
+    <div class="box">
+        <div class="box-body">
+            <div class="table-responsive">
+
+                <hr class="my-15">
+                @if (Model.Any())
+                {
+                    <table id="example5" class="table table-hover table-bordered table-striped" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th hidden>#</th>
+                                <th>الاسم</th>
+                                <th>رقم الاقامة</th>
+                                <th>رقم الجوال</th>
+                                <th>نوع الضرر</th>
+                                <th>تاريخ الضرر</th>
+                                <th>اسم المنطقه</th>
+                                <th>المدينة</th>
+                                <th>التامين</th>
+
+                                <th>صورة الضرر</th>
+                                <th>صورة المركبة</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (PersonDataModel item in Model)
+                            {
+
+                            <tr>
+
+                                <td hidden>
+                                    @item.Id
+                                </td>
+                                <td>
+                                    @item.Name
+                                </td>
+                                <td>
+                                    @item.Iqama
+                                <td>
+                                    @item.PhoneNumber
+                                </td>
+                                <td>
+                                    @item.str_Damage
+                                </td>
+                                <td>
+                                    @item.DamageDate.Value.ToString("dd/MM/yyyy hh:mm tt")
+                                </td>
+                                <td>
+                                    @item.str_Region
+                                </td>
+                                <td>
+                                    @item.City
+                                </td>
+                                <td>
+                                    @{ 
+                                        var txt = (Enum.GetValues(typeof(Ensurrance)).GetValue(item.InsurranceId)).ToString();
+                                    }
+                                    @txt
+                                </td>
+
+                                @if (string.IsNullOrEmpty(item.DamageImage))
+                                {
+                                    <td>
+                                        <img class="styleImageProfile" src="~/images/imgempty.jpg" alt="No Image Uploaded" />
+                                    </td>
+                                }
+
+                                else
+                                {
+                                    <td>
+                                        <img class="styleImageProfile" src="~/UploadedImages/@(item.Id)/@(item.DamageImage)" alt="No Image Uploaded" />
+                                    </td>
+                                }
+                                @if (string.IsNullOrEmpty(item.VehicleImage))
+                                {
+                                    <td>
+                                        <img class="styleImageProfile" src="~/images/imgempty.jpg" alt="No Image Uploaded" />
+                                    </td>
+                                }
+
+                                else
+                                {
+                                    <td>
+                                        <img class="styleImageProfile" src="~/UploadedImages/@(item.Id)/@(item.VehicleImage)" alt="No Image Uploaded" />
+                                    </td>
+                                }
+
+                            </tr>
+                            }
+
+
+
+                        </tbody>
+                      
+                    </table>
+                }
+                else
+                {
+                    <div class="alert alert-info text-bold text-center">لا يوجد بيانات</div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
