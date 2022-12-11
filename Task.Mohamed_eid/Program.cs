@@ -13,7 +13,7 @@ namespace Task.Mohamed_eid
     public class Program
     {
         public static void Main(string[] args)
-        {
+        {     
            var host = CreateHostBuilder(args).Build();
 
             var config = new ConfigurationBuilder()

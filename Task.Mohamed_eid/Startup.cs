@@ -47,7 +47,6 @@ namespace Task.Mohamed_eid
             services.AddScoped<ILocationData, LocationDataRepository>();
 
             services.AddAutoMapper(typeof(Startup));
-
             services.AddControllersWithViews();
         }
 
